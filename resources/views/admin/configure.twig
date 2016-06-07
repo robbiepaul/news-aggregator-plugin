@@ -1,0 +1,29 @@
+{% set data = session_flashed('__form_data').0 %}
+{% set fd = (data) ? data : fd %}
+<div class="wrap">
+    <h1>News Aggregator settings</h1>
+    {% spaceless %}
+        <form method="post" action="{{ panel_url('NewsAggregator::configure') }}" novalidate="novalidate">
+
+            <table class="form-table">
+                <tbody>
+                <tr>
+                    <th scope="row"><label for="auto_publish">Auto-publish feeds</label></th>
+                    <td>
+                        <input name="auto_publish" type="checkbox" id="auto_publish" aria-describedby="auto_publish-description" value="1" {% if fd.auto_publish %} checked="checked" {% endif %}>
+                        <p class="description" id="auto_publish-description">Do you want to automatically publish the content as soon as it becomes available?</p></td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="allow_submissions">Allow submissions</label></th>
+                    <td>
+                        <input name="allow_submissions" type="checkbox" id="allow_submissions" aria-describedby="allow_submissions-description" value="1" {% if fd.allow_submissions %} checked="checked" {% endif %}>
+                        <p class="description" id="allow_submissions-description">Use the [content_submission_form] to display the form to your visitors</p></td>
+
+                </tr>
+                </tbody></table>
+
+            <p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes"></p>
+        </form>
+    {% endspaceless %}
+
+</div>

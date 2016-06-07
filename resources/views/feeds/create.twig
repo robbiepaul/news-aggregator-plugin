@@ -1,0 +1,38 @@
+{% set data = session_flashed('__form_data').0 %}
+{% set fd = (data) ? data : fd %}
+<div class="wrap">
+    <h1>Add new feed</h1>
+    {% spaceless %}
+        <form method="post" action="{{ panel_url('NewsAggregator::add-feed') }}" novalidate="novalidate">
+            <table class="form-table">
+                <tbody>
+                <tr>
+                    <th scope="row"><label for="type">Type</label></th>
+                    <td>
+                        <select name="type" id="type">
+                            <option value="">Please select...</option>
+                            {% for type,name in services %}
+                                <option value="{{ type }}">{{ name }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="title">Title</label></th>
+                    <td>
+                        <input name="title" type="text" id="title" aria-describedby="title-description" class="regular-text" value="{{ fd.title }}">
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="url">URL</label></th>
+                    <td>
+                        <input name="url" type="text" id="url" aria-describedby="title-description" class="regular-text" value="{{ fd.url }}">
+                    </td>
+                </tr>
+                </tbody></table>
+
+            <p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="Add"></p>
+        </form>
+    {% endspaceless %}
+
+</div>

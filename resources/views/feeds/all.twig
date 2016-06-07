@@ -1,0 +1,32 @@
+<div class="wrap">
+    <h1>Feeds <a href="{{ panel_url('NewsAggregator::add-feed') }}" class="page-title-action">Add New</a></h1>
+
+    {% if feeds %}
+        <table class="wp-list-table widefat fixed striped posts">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Type</th>
+                    <th>URL</th>
+                    <th>Status</th>
+                    <th>Last checked at</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for feed in feeds %}
+                <tr>
+                    <td>{{ feed.id }}</td>
+                    <td>{{ feed.type | e }}</td>
+                    <td>{{ feed.url | e }}</td>
+                    <td>{{ feed.status | e }}</td>
+                    <td>{{ feed.last_checked_at | e }}</td>
+                    <td><a href="/feed/{{ feed.id }}/check">Check now</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="text-center">You have no feeds. <a href="{{ panel_url('NewsAggregator::add-feed') }}">Add</a> one now.</p>
+    {% endif %}
+</div>
